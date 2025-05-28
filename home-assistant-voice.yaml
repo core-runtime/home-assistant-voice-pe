@@ -1011,6 +1011,12 @@ sensor:
                       id(mww_gain) = (id(mww_gain)*2)/3;
                     }
                 - script.execute: set_gain_factor
+  - platform: template
+    name: mWW Gain Factor
+    lambda: return id(mww_gain);
+    entity_category: diagnostic
+    update_interval: 15s
+    state_class: measurement
 
 number:
   - platform: template
