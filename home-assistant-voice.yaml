@@ -221,12 +221,18 @@ switch:
       - if:
           condition:
             media_player.is_announcing:
+              id: external_media_player
           then:
             media_player.stop:
               announcement: true
+              id: external_media_player
       # Set back ducking ratio to zero
       - mixer_speaker.apply_ducking:
           id: media_mixing_input
+          decibel_reduction: 0
+          duration: 1.0s
+      - mixer_speaker.apply_ducking:
+          id: resonate_mixing_input
           decibel_reduction: 0
           duration: 1.0s
       # Refresh the LED ring
@@ -235,6 +241,10 @@ switch:
       # Duck audio
       - mixer_speaker.apply_ducking:
           id: media_mixing_input
+          decibel_reduction: 20
+          duration: 0.0s
+      - mixer_speaker.apply_ducking:
+          id: resonate_mixing_input
           decibel_reduction: 20
           duration: 0.0s
       # Enable stop wake word
@@ -302,22 +312,25 @@ binary_sensor:
                             - if:
                                 condition:
                                   media_player.is_announcing:
+                                    id: external_media_player
                                 then:
                                   media_player.stop:
                                     announcement: true
+                                    id: external_media_player
                                 else:
                                   - if:
                                       condition:
                                         media_player.is_playing:
+                                          id: external_media_player
                                       then:
                                         - media_player.pause:
+                                            id: external_media_player
                                       else:
                                         - if:
                                             condition:
                                               and:
                                                 - switch.is_off: master_mute_switch
-                                                - not:
-                                                    voice_assistant.is_running
+                                                - not: voice_assistant.is_running
                                             then:
                                               - script.execute:
                                                   id: play_sound
@@ -973,6 +986,33 @@ sensor:
             - script.execute:
                 id: control_hue
                 increase_hue: false
+  - platform: debug
+    free:
+      name: "Heap Free"
+    block:
+      name: "Block Free"
+    loop_time:
+      name: "Loop Time"
+    psram:
+      name: "PSRAM Free"
+  - platform: resonate
+    type: kalman_error
+    name: "Kalman Error"
+  - platform: resonate
+    type: hard_sync_frames_added
+    name: "Hard syncs adding frames count"
+  - platform: resonate
+    type: hard_sync_frames_removed
+    name: "Hard syncs removing frames count"
+  - platform: resonate
+    type: single_sync_frames_added
+    name: "Single sync frames added count"
+  - platform: resonate
+    type: single_sync_frames_removed
+    name: "Single sync frames removed count"
+  - platform: resonate
+    type: audible_syncs
+    name: "Audible Syncs"
 
 event:
   # Event entity exposed to the user to automate on complex center button presses.
@@ -1246,8 +1286,10 @@ script:
             lambda: return increase_volume;
           then:
             - media_player.volume_up:
+                id: external_media_player
           else:
             - media_player.volume_down:
+                id: external_media_player
       - script.execute: control_leds
       - delay: 1s
       - lambda: id(dial_touched) = false;
@@ -1411,6 +1453,7 @@ script:
             - wait_until:
                 not:
                   media_player.is_announcing:
+                    id: external_media_player
             - if:
                 condition:
                   switch.is_off: timer_ringing
@@ -1464,11 +1507,15 @@ speaker:
     id: mixing_speaker
     output_speaker: i2s_audio_speaker
     num_channels: 2
+    task_stack_in_psram: true
     source_speakers:
       - id: announcement_mixing_input
         timeout: never
       - id: media_mixing_input
         timeout: never
+      - id: resonate_mixing_input
+        timeout: never
+        buffer_duration: 200ms
 
   # Vritual speakers to resample each pipelines' audio, if necessary, as the mixer speaker requires the same sample rate
   - platform: resampler
@@ -1476,17 +1523,45 @@ speaker:
     output_speaker: announcement_mixing_input
     sample_rate: 48000
     bits_per_sample: 16
+    task_stack_in_psram: true
   - platform: resampler
     id: media_resampling_speaker
     output_speaker: media_mixing_input
+    task_stack_in_psram: true
+    sample_rate: 48000
+    bits_per_sample: 16
+    taps: 16
+  - platform: resampler
+    id: resonate_resampling_speaker
+    output_speaker: resonate_mixing_input
+    # output_speaker: i2s_audio_speaker
+    task_stack_in_psram: true
     sample_rate: 48000
     bits_per_sample: 16
 
+resonate:
+  id: resonate_hub
+  task_stack_in_psram: true
+  kalman_process_error: 0.01
+
+text_sensor:
+  - platform: resonate
+    type: title
+    name: Resonate Track
+
 media_player:
+  - platform: resonate
+    id: resonate_media_player
+    name: Resonate Media Player
+    speaker: resonate_resampling_speaker
+    # speaker: resonate_mixing_input
+    # speaker: i2s_audio_speaker
+    task_stack_in_psram: true
   - platform: speaker
     id: external_media_player
     name: Media Player
     internal: False
+    task_stack_in_psram: true
     volume_increment: 0.05
     volume_min: 0.4
     volume_max: 0.85
@@ -1511,6 +1586,10 @@ media_player:
           id: media_mixing_input
           decibel_reduction: 20
           duration: 0.0s
+      - mixer_speaker.apply_ducking:
+          id: resonate_mixing_input
+          decibel_reduction: 20
+          duration: 0.0s
     on_state:
       if:
         condition:
@@ -1519,10 +1598,14 @@ media_player:
             - not:
                 voice_assistant.is_running:
             - not:
-                media_player.is_announcing:
+                media_player.is_announcing: external_media_player
         then:
           - mixer_speaker.apply_ducking:
               id: media_mixing_input
+              decibel_reduction: 0
+              duration: 1.0s
+          - mixer_speaker.apply_ducking:
+              id: resonate_mixing_input
               decibel_reduction: 0
               duration: 1.0s
     files:
@@ -1576,6 +1659,9 @@ external_components:
     components:
       - voice_kit
     refresh: 0s
+  - source: github://pr#10183
+    components: [audio, mdns, resonate]
+    refresh: 0s
 
 audio_dac:
   - platform: aic3204
@@ -1624,9 +1710,11 @@ micro_wake_word:
                       - if:
                           condition:
                             media_player.is_announcing:
+                              id: external_media_player
                           then:
                             - media_player.stop:
                                 announcement: true
+                                id: external_media_player
                           # Start the voice assistant and play the wake sound, if enabled
                           else:
                             - if:
@@ -1717,8 +1805,12 @@ voice_assistant:
   on_start:
     - mixer_speaker.apply_ducking:
         id: media_mixing_input
-        decibel_reduction: 20  # Number of dB quieter; higher implies more quiet, 0 implies full volume
-        duration: 0.0s         # The duration of the transition (default is no transition)
+        decibel_reduction: 20 # Number of dB quieter; higher implies more quiet, 0 implies full volume
+        duration: 0.0s # The duration of the transition (default is no transition)
+    - mixer_speaker.apply_ducking:
+        id: resonate_mixing_input
+        decibel_reduction: 20
+        duration: 0.0s
   on_listening:
     - lambda: id(voice_assistant_phase) = ${voice_assist_waiting_for_command_phase_id};
     - script.execute: control_leds
@@ -1756,6 +1848,10 @@ voice_assistant:
     # Stop ducking audio.
     - mixer_speaker.apply_ducking:
         id: media_mixing_input
+        decibel_reduction: 0
+        duration: 1.0s
+    - mixer_speaker.apply_ducking:
+        id: resonate_mixing_input
         decibel_reduction: 0
         duration: 1.0s
     # If the end happened because of an error, let the error phase on for a second
