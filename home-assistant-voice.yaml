@@ -82,6 +82,7 @@ wifi:
     - script.execute: control_leds
   on_disconnect:
     - script.execute: control_leds
+  power_save_mode: NONE  # Needed to maintain good Resonate sync
 
 network:
   enable_ipv6: true
@@ -995,24 +996,6 @@ sensor:
       name: "Loop Time"
     psram:
       name: "PSRAM Free"
-  - platform: resonate
-    type: kalman_error
-    name: "Kalman Error"
-  - platform: resonate
-    type: hard_sync_frames_added
-    name: "Hard syncs adding frames count"
-  - platform: resonate
-    type: hard_sync_frames_removed
-    name: "Hard syncs removing frames count"
-  - platform: resonate
-    type: single_sync_frames_added
-    name: "Single sync frames added count"
-  - platform: resonate
-    type: single_sync_frames_removed
-    name: "Single sync frames removed count"
-  - platform: resonate
-    type: audible_syncs
-    name: "Audible Syncs"
 
 event:
   # Event entity exposed to the user to automate on complex center button presses.
@@ -1544,19 +1527,20 @@ resonate:
   task_stack_in_psram: true
   kalman_process_error: 0.01
 
-text_sensor:
-  - platform: resonate
-    type: title
-    name: Resonate Track
-
 media_player:
   - platform: resonate
     id: resonate_media_player
     name: Resonate Media Player
     speaker: resonate_resampling_speaker
-    # speaker: resonate_mixing_input
-    # speaker: i2s_audio_speaker
     task_stack_in_psram: true
+    volume_min: 0.4
+    volume_max: 0.85
+    on_state:
+      - lambda: |-
+          if (id(external_media_player).is_ready()) {
+            id(external_media_player).volume = id(resonate_media_player).volume;
+            id(external_media_player)->publish_state();
+          }
   - platform: speaker
     id: external_media_player
     name: Media Player
@@ -1581,6 +1565,10 @@ media_player:
       - script.execute: control_leds
     on_volume:
       - script.execute: control_leds
+      - lambda: |-
+          if (id(resonate_media_player).is_ready()) {
+            id(resonate_media_player)->sync_speaker_volume();
+          }
     on_announcement:
       - mixer_speaker.apply_ducking:
           id: media_mixing_input
@@ -1659,8 +1647,11 @@ external_components:
     components:
       - voice_kit
     refresh: 0s
-  - source: github://pr#10183
-    components: [audio, mdns, resonate, mixer]
+  - source:
+      type: git
+      url: https://github.com/esphome/esphome
+      ref: 2149c3c0baed68259ea3fb7fb425e606db785e5b
+    components: [audio, mdns, mixer, resampler, resonate]
     refresh: 0s
 
 audio_dac:
