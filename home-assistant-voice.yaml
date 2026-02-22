@@ -1712,54 +1712,54 @@ micro_wake_word:
   stop_after_detection: false
   models:
     # ========================================================================
-    # Custom Wake Words (Local Models)
+    # Custom Wake Words (Hosted on fork)
     # ========================================================================
-    # These models are bundled in the models/ directory and don't require
-    # network access. Sourced from: https://github.com/TaterTotterson/microWakeWords
+    # Models sourced from: https://github.com/TaterTotterson/microWakeWords
+    # Hosted at: https://github.com/core-runtime/home-assistant-voice-pe
     # ========================================================================
     
     # "Alfred" - Personal assistant vibe
-    - model: models/alfred.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/alfred.json
       id: alfred
     
     # "Skynet" - For when you want your home to feel sentient
-    - model: models/skynet.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/skynet.json
       id: skynet
     
     # "TARS" - Interstellar-inspired robot companion
-    - model: models/tars.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/tars.json
       id: tars
     
     # "Alexa" - Amazon-style wake word
-    - model: models/alexa.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/alexa.json
       id: alexa
     
     # "Claude" - Anthropic's AI assistant
-    - model: models/claude.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/claude.json
       id: claude
     
     # "Computer" - Classic sci-fi activation
-    - model: models/computer.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/computer.json
       id: computer
     
     # "Cortana" - Halo-inspired AI assistant
-    - model: models/cortana.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/cortana.json
       id: cortana
     
     # "Einstein" - Genius-level activation
-    - model: models/einstein.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/einstein.json
       id: einstein
     
     # "Gemini" - Google's AI assistant
-    - model: models/gemini.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/gemini.json
       id: gemini
     
     # "Linus" - For the Linux enthusiast
-    - model: models/linus.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/linus.json
       id: linus
     
     # "Isaac" - Asimov-inspired roboticist
-    - model: models/isaac.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/isaac.json
       id: isaac
     
     # ========================================================================

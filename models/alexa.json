@@ -2,11 +2,9 @@
   "type": "micro",
   "wake_word": "alexa",
   "author": "Tater Totterson",
-  "website": "https://github.com/TaterTotterson/microWakeWord-Trainer-AppleSilicon",
-  "model": "alexa.tflite",
-  "trained_languages": [
-    "en"
-  ],
+  "website": "https://github.com/TaterTotterson/microWakeWords",
+  "model": "https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/alexa.tflite",
+  "trained_languages": ["en"],
   "version": 2,
   "micro": {
     "probability_cutoff": 0.97,
