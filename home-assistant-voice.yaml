@@ -1718,7 +1718,7 @@ micro_wake_word:
     # network access. Sourced from: https://github.com/TaterTotterson/microWakeWords
     # ========================================================================
     
-    # "Alfred" - Custom wake word for personal assistant vibe
+    # "Alfred" - Personal assistant vibe
     - model: models/alfred.json
       id: alfred
     
@@ -1729,6 +1729,34 @@ micro_wake_word:
     # "TARS" - Interstellar-inspired robot companion
     - model: models/tars.json
       id: tars
+    
+    # "Alexa" - Amazon-style wake word
+    - model: models/alexa.json
+      id: alexa
+    
+    # "Computer" - Classic sci-fi activation
+    - model: models/computer.json
+      id: computer
+    
+    # "Cortana" - Halo-inspired AI assistant
+    - model: models/cortana.json
+      id: cortana
+    
+    # "Einstein" - Genius-level activation
+    - model: models/einstein.json
+      id: einstein
+    
+    # "Gemini" - Google's AI assistant
+    - model: models/gemini.json
+      id: gemini
+    
+    # "Linus" - For the Linux enthusiast
+    - model: models/linus.json
+      id: linus
+    
+    # "Isaac" - Asimov-inspired roboticist
+    - model: models/isaac.json
+      id: isaac
     
     # ========================================================================
     # Default Wake Words (Upstream)

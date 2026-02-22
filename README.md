@@ -4,13 +4,20 @@ This is a fork of the [Home Assistant Voice: Preview Edition](https://www.home-a
 
 ## Custom Wake Words
 
-This fork includes three additional locally-hosted microWakeWord models:
+This fork includes additional locally-hosted microWakeWord models:
 
 | Wake Word | Model ID | Source |
 |-----------|----------|--------|
 | **Alfred** | `alfred` | `models/alfred.json` |
 | **Skynet** | `skynet` | `models/skynet.json` |
 | **TARS** | `tars` | `models/tars.json` |
+| **Alexa** | `alexa` | `models/alexa.json` |
+| **Computer** | `computer` | `models/computer.json` |
+| **Cortana** | `cortana` | `models/cortana.json` |
+| **Einstein** | `einstein` | `models/einstein.json` |
+| **Gemini** | `gemini` | `models/gemini.json` |
+| **Linus** | `linus` | `models/linus.json` |
+| **Isaac** | `isaac` | `models/isaac.json` |
 
 Models sourced from [TaterTotterson/microWakeWords](https://github.com/TaterTotterson/microWakeWords).
 
