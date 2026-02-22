@@ -1711,21 +1711,40 @@ micro_wake_word:
     gain_factor: 4
   stop_after_detection: false
   models:
-    # Local Alfred model from models/alfred.json in this firmware
+    # ========================================================================
+    # Custom Wake Words (Local Models)
+    # ========================================================================
+    # These models are bundled in the models/ directory and don't require
+    # network access. Sourced from: https://github.com/TaterTotterson/microWakeWords
+    # ========================================================================
+    
+    # "Alfred" - Custom wake word for personal assistant vibe
     - model: models/alfred.json
       id: alfred
-    # Local Skynet model from models/skynet.json in this firmware
+    
+    # "Skynet" - For when you want your home to feel sentient
     - model: models/skynet.json
       id: skynet
-    # Local TARS model from models/tars.json in this firmware
+    
+    # "TARS" - Interstellar-inspired robot companion
     - model: models/tars.json
       id: tars
+    
+    # ========================================================================
+    # Default Wake Words (Upstream)
+    # ========================================================================
+    
+    # Official Home Assistant wake word (hosted remotely)
     - model: https://github.com/kahrendt/microWakeWord/releases/download/okay_nabu_20241226.3/okay_nabu.json
       id: okay_nabu
+    
+    # Built-in wake words (embedded in ESPHome)
     - model: hey_jarvis
       id: hey_jarvis
     - model: hey_mycroft
       id: hey_mycroft
+    
+    # Stop command (internal, used to interrupt voice assistant)
     - model: https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.json
       id: stop
       internal: true
