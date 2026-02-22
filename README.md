@@ -1,49 +1,99 @@
-# Home Assistant Voice: Preview Edition (Custom Fork)
+# Home Assistant Voice PE - PopCulture WakeWord Edition
 
-This is a fork of the [Home Assistant Voice: Preview Edition](https://www.home-assistant.io/voice-pe/) ESPHome source code with additional custom wake words.
+[![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](https://github.com/core-runtime/home-assistant-voice-pe/releases/tag/v1.0.0)
+[![ESPHome](https://img.shields.io/badge/ESPHome-2026.2.0+-green.svg)](https://esphome.io)
 
-## Custom Wake Words
+A custom fork of the [Home Assistant Voice: Preview Edition](https://www.home-assistant.io/voice-pe/) featuring pop culture-inspired wake words.
 
-This fork includes additional locally-hosted microWakeWord models:
+---
 
-| Wake Word | Model ID | Source |
-|-----------|----------|--------|
-| **Alfred** | `alfred` | `models/alfred.json` |
-| **Skynet** | `skynet` | `models/skynet.json` |
-| **TARS** | `tars` | `models/tars.json` |
-| **Alexa** | `alexa` | `models/alexa.json` |
-| **Claude** | `claude` | `models/claude.json` |
-| **Computer** | `computer` | `models/computer.json` |
-| **Cortana** | `cortana` | `models/cortana.json` |
-| **Einstein** | `einstein` | `models/einstein.json` |
-| **Gemini** | `gemini` | `models/gemini.json` |
-| **Linus** | `linus` | `models/linus.json` |
-| **Isaac** | `isaac` | `models/isaac.json` |
+## Version 1.0.0 (Stable)
 
-Models sourced from [TaterTotterson/microWakeWords](https://github.com/TaterTotterson/microWakeWords).
+**Release Date:** February 22, 2026
 
-### Default Wake Words (Still Included)
+### Included Wake Words (11 Custom)
+
+| Wake Word | Model ID | Type |
+|-----------|----------|------|
+| **Alfred** | `alfred` | Custom |
+| **Skynet** | `skynet` | Custom |
+| **TARS** | `tars` | Custom |
+| **Alexa** | `alexa` | Custom |
+| **Claude** | `claude` | Custom |
+| **Computer** | `computer` | Custom |
+| **Cortana** | `cortana` | Custom |
+| **Einstein** | `einstein` | Custom |
+| **Gemini** | `gemini` | Custom |
+| **Linus** | `linus` | Custom |
+| **Isaac** | `isaac` | Custom |
+
+### Built-in Wake Words (3)
 
 - `okay_nabu` - Official Home Assistant wake word
 - `hey_jarvis` - Built-in
 - `hey_mycroft` - Built-in
 - `stop` - Internal stop command
 
-## Setup
+**Total:** 14 wake words
 
-See [the official documentation](https://voice-pe.home-assistant.io/) for set up and troubleshooting.
+---
 
-If you need to re-install the firmware, [use this installer](https://esphome.github.io/home-assistant-voice-pe/).
+## Memory Stats (v1.0.0)
 
-## Building
+| Section | Used | Free | Total |
+|---------|------|------|-------|
+| **Flash** | 3.4 MB | 12.6 MB | 16 MB |
+| **DIRAM** | 123 KB (36%) | 218 KB (64%) | 342 KB |
 
-To build this firmware with the custom wake words:
+---
+
+## Installation
+
+### Device YAML
+
+Add this to your ESPHome device configuration:
+
+```yaml
+packages:
+  PopCulture WakeWord Edition: github://core-runtime/home-assistant-voice-pe/home-assistant-voice.yaml@v1.0.0
+```
+
+Or use `main` branch for latest stable:
+
+```yaml
+packages:
+  PopCulture WakeWord Edition: github://core-runtime/home-assistant-voice-pe/home-assistant-voice.yaml@main
+```
+
+### Building
 
 ```bash
 esphome compile home-assistant-voice.yaml
 ```
 
-## Upstream
+---
 
-- **Original repo:** [esphome/home-assistant-voice-pe](https://github.com/esphome/home-assistant-voice-pe)
-- **Fork maintained by:** [core-runtime](https://github.com/core-runtime)
+## Changelog
+
+### v1.0.0 (2026-02-22)
+- Initial stable release
+- 11 custom pop culture wake words
+- All models hosted on GitHub raw URLs
+- Tested & compiles successfully
+- Memory validated with headroom for expansion
+
+---
+
+## Sources
+
+- **Wake word models:** [TaterTotterson/microWakeWords](https://github.com/TaterTotterson/microWakeWords)
+- **Original firmware:** [esphome/home-assistant-voice-pe](https://github.com/esphome/home-assistant-voice-pe)
+- **Documentation:** [voice-pe.home-assistant.io](https://voice-pe.home-assistant.io/)
+
+---
+
+## Maintained By
+
+[core-runtime](https://github.com/core-runtime)
+
+*PopCulture WakeWord Edition - Because your home assistant should answer to the names you love.*
