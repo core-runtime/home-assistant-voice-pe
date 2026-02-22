@@ -1734,6 +1734,10 @@ micro_wake_word:
     - model: models/alexa.json
       id: alexa
     
+    # "Claude" - Anthropic's AI assistant
+    - model: models/claude.json
+      id: claude
+    
     # "Computer" - Classic sci-fi activation
     - model: models/computer.json
       id: computer

@@ -12,6 +12,7 @@ This fork includes additional locally-hosted microWakeWord models:
 | **Skynet** | `skynet` | `models/skynet.json` |
 | **TARS** | `tars` | `models/tars.json` |
 | **Alexa** | `alexa` | `models/alexa.json` |
+| **Claude** | `claude` | `models/claude.json` |
 | **Computer** | `computer` | `models/computer.json` |
 | **Cortana** | `cortana` | `models/cortana.json` |
 | **Einstein** | `einstein` | `models/einstein.json` |
