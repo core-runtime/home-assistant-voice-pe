@@ -3,7 +3,7 @@
   "wake_word": "skynet",
   "author": "Tater Totterson",
   "website": "https://github.com/TaterTotterson/microWakeWords",
-  "model": "https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/skynet.tflite",
+  "model": "https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/skynet.tflite",
   "trained_languages": ["en"],
   "version": 2,
   "micro": {

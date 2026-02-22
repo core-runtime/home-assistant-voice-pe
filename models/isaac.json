@@ -3,7 +3,7 @@
   "wake_word": "isaac",
   "author": "Tater Totterson",
   "website": "https://github.com/TaterTotterson/microWakeWords",
-  "model": "https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/isaac.tflite",
+  "model": "https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/isaac.tflite",
   "trained_languages": ["en"],
   "version": 2,
   "micro": {

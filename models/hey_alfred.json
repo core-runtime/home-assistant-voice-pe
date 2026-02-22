@@ -1,9 +1,9 @@
 {
   "type": "micro",
-  "wake_word": "tars",
+  "wake_word": "hey_alfred",
   "author": "Tater Totterson",
   "website": "https://github.com/TaterTotterson/microWakeWords",
-  "model": "https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/tars.tflite",
+  "model": "https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/hey_alfred.tflite",
   "trained_languages": ["en"],
   "version": 2,
   "micro": {

@@ -1716,51 +1716,84 @@ micro_wake_word:
     # ========================================================================
     # Models sourced from: https://github.com/TaterTotterson/microWakeWords
     # Hosted at: https://github.com/core-runtime/home-assistant-voice-pe
+    # Branch: v1.1-dev
     # ========================================================================
     
     # "Alfred" - Personal assistant vibe
-    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/alfred.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/alfred.json
       id: alfred
     
     # "Skynet" - For when you want your home to feel sentient
-    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/skynet.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/skynet.json
       id: skynet
     
     # "TARS" - Interstellar-inspired robot companion
-    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/tars.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/tars.json
       id: tars
     
     # "Alexa" - Amazon-style wake word
-    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/alexa.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/alexa.json
       id: alexa
     
     # "Claude" - Anthropic's AI assistant
-    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/claude.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/claude.json
       id: claude
     
     # "Computer" - Classic sci-fi activation
-    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/computer.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/computer.json
       id: computer
     
     # "Cortana" - Halo-inspired AI assistant
-    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/cortana.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/cortana.json
       id: cortana
     
     # "Einstein" - Genius-level activation
-    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/einstein.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/einstein.json
       id: einstein
     
     # "Gemini" - Google's AI assistant
-    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/gemini.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/gemini.json
       id: gemini
     
     # "Linus" - For the Linux enthusiast
-    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/linus.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/linus.json
       id: linus
     
     # "Isaac" - Asimov-inspired roboticist
-    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/dev/models/isaac.json
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/isaac.json
       id: isaac
+    
+    # ========================================================================
+    # v1.1 Additions - More Pop Culture Wake Words
+    # ========================================================================
+    
+    # "Arnie" - Get to the choppa!
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/arnie.json
+      id: arnie
+    
+    # "Axel" - Beverly Hills Cop vibes
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/axel.json
+      id: axel
+    
+    # "Harley Quinn" - Gotham's favorite
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/harley_quinn.json
+      id: harley_quinn
+    
+    # "Hey Alexa" - Double tap wake word
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/hey_alexa.json
+      id: hey_alexa
+    
+    # "Hey Alfred" - Polite butler mode
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/hey_alfred.json
+      id: hey_alfred
+    
+    # "Hey Isaac" - Sci-fi robot vibes
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/hey_isaac.json
+      id: hey_isaac
+    
+    # "House" - Home automation literalist
+    - model: https://raw.githubusercontent.com/core-runtime/home-assistant-voice-pe/v1.1-dev/models/house.json
+      id: house
     
     # ========================================================================
     # Default Wake Words (Upstream)
